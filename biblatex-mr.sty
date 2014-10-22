@@ -1,5 +1,5 @@
 %% biblatex-mr.sty
-%% Copyright 2013 P. Zorin-Kranich
+%% Copyright 2013-2014 P. Zorin-Kranich
 %
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
@@ -11,16 +11,36 @@
 %
 % This work has the LPPL maintenance status `maintained'.
 % 
-% The Current Maintainer of this work is M. Y. Name.
+% The Current Maintainer of this work is P. Zorin-Kranich.
 %
 % This work consists of the files biblatex-mr.sty and biblatex-dm.cfg
 
 %% This package modifies standard biblatex styles by including the Math Review number
 %% Requires the accompanying change to the biblatex data model
+%% The option titlelink makes the title point to URL or DOI if present
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{biblatex-mr}[2013/07/31]
+\ProvidesPackage{biblatex-mr}[2014/10/22]
 \RequirePackage{biblatex}
+
+\DeclareOption{titlelink}{
+%\PassOptionsToPackage{doi=false,url=false,isbn=false}{biblatex}% Do not typeset hyperlinks
+\AtBeginDocument{% Add hyperlinks to a string
+\newbibmacro{string+urldoi}[1]{%
+  \iffieldundef{url}{%
+    \iffieldundef{doi}{%
+        #1%
+      }{% if doi defined
+        \href{http://dx.doi.org/\thefield{doi}}{#1}%
+    }%
+  }{% if url defined
+    \href{\thefield{url}}{#1}%
+  }%
+}
+\DeclareFieldFormat[article,misc,incollection,book]{title}{\usebibmacro{string+urldoi}{\mkbibquote{#1}}}
+}
+}
+\ProcessOptions\relax
 
 %% smart \MR
 %% code suggested by Vilmos Prokaj <prokaj@cs.elte.hu>
