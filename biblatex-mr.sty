@@ -21,10 +21,9 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{biblatex-mr}[2014/10/22]
-\RequirePackage{biblatex}
 
 \DeclareOption{titlelink}{
-%\PassOptionsToPackage{doi=false,url=false,isbn=false}{biblatex}% Do not typeset hyperlinks
+\PassOptionsToPackage{doi=false,url=false,isbn=false}{biblatex}% Do not typeset hyperlinks
 \AtBeginDocument{% Add hyperlinks to a string
 \newbibmacro{string+urldoi}[1]{%
   \iffieldundef{url}{%
@@ -41,6 +40,7 @@
 }
 }
 \ProcessOptions\relax
+\RequirePackage{biblatex}
 
 %% smart \MR
 %% code suggested by Vilmos Prokaj <prokaj@cs.elte.hu>
