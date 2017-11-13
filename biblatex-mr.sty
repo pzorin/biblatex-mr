@@ -30,7 +30,7 @@
     \iffieldundef{doi}{%
         #1%
       }{% if doi defined
-        \href{http://dx.doi.org/\thefield{doi}}{#1}%
+        \href{https://doi.org/\thefield{doi}}{#1}%
     }%
   }{% if url defined
     \href{\thefield{url}}{#1}%
