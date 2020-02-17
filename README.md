@@ -17,3 +17,8 @@ git clone https://github.com/pzorin/biblatex-mr.git
 ```
 
 If you want to use this configuration for a single document, then copy the `.cfg` files into the directory containing the tex file.
+
+Caveats
+-------
+Mathscinet used to output `MRNUMBER` fields in different formats.
+The following Emacs regexp converts them to the current (as of February 2020) format: search for `mrnumber *= *{[ mr]*\([0-9]*\).*?}`, replace with `mrnumber = {\1}`.
